@@ -6,11 +6,11 @@ Uploaders: Baruch Even <baruch@debian.org>,
  Lior Kaplan <kaplan@debian.org>,
  Shachar Shemesh <shachar@debian.org>,
  أحمد المحمودي (Ahmed El-Mahmoudy) <aelmahmoudy@sabily.org>
-Standards-Version: 3.9.3
+Standards-Version: 3.9.4
 Build-Depends: debhelper (>= 9~), pkg-config
 Homepage: http://www.fribidi.org/
-Vcs-Git: git://git.debian.org/git/collab-maint/fribidi.git
-Vcs-Browser: http://git.debian.org/?p=collab-maint/fribidi.git
+Vcs-Git: git://anonscm.debian.org/collab-maint/fribidi.git
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=collab-maint/fribidi.git
 
 Package: libfribidi0
 Architecture: any

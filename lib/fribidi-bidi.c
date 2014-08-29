@@ -1,11 +1,11 @@
 /* FriBidi
  * fribidi-bidi.c - bidirectional algorithm
  *
- * $Id: fribidi-bidi.c,v 1.21 2007/03/15 18:09:25 behdad Exp $
+ * $Id: fribidi-bidi.c,v 1.21 2007-03-15 18:09:25 behdad Exp $
  * $Author: behdad $
- * $Date: 2007/03/15 18:09:25 $
+ * $Date: 2007-03-15 18:09:25 $
  * $Revision: 1.21 $
- * $Source: /cvs/fribidi/fribidi2/lib/fribidi-bidi.c,v $
+ * $Source: /home/behdad/src/fdo/fribidi/togit/git/../fribidi/fribidi2/lib/fribidi-bidi.c,v $
  *
  * Authors:
  *   Behdad Esfahbod, 2001, 2002, 2004
@@ -27,8 +27,8 @@
  * 
  * You should have received a copy of the GNU Lesser General Public License
  * along with this library, in a file named COPYING; if not, write to the
- * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
- * Boston, MA 02111-1307, USA
+ * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+ * Boston, MA 02110-1301, USA
  * 
  * For licensing issues, contact <license@farsiweb.info>.
  */
@@ -463,6 +463,13 @@ fribidi_get_par_embedding_levels (
 	  move_node_before (pp, explicits_list);
 	  pp = &temp_link;
 	}
+      else if (this_type == FRIBIDI_TYPE_BS)
+	{
+	  /* X8. All explicit directional embeddings and overrides are
+	     completely terminated at the end of each paragraph. Paragraph
+	     separators are not included in the embedding. */
+	  break;
+	}
       else
 	{
 	  /* X6. For all types besides RLE, LRE, RLO, LRO, and PDF:
@@ -475,11 +482,6 @@ fribidi_get_par_embedding_levels (
 	  if (!FRIBIDI_IS_NEUTRAL (override))
 	    RL_TYPE (pp) = override;
 	}
-      /* X8. All explicit directional embeddings and overrides are
-         completely terminated at the end of each paragraph. Paragraph
-         separators are not included in the embedding. */
-      /* This function is running on a single paragraph, so we can do
-         X8 after all the input is processed. */
     }
 
     /* Implementing X8. It has no effect on a single paragraph! */
@@ -546,6 +548,10 @@ fribidi_get_par_embedding_levels (
 	    pp = merge_with_prev (pp);
 	  else
 	    RL_TYPE (pp) = prev_type;
+	  if (prev_type == next_type && RL_LEVEL (pp) == RL_LEVEL (pp->next))
+	    {
+	      pp = merge_with_prev (pp->next);
+	    }
 	  continue;		/* As we know the next condition cannot be true. */
 	}
 
@@ -564,7 +570,7 @@ fribidi_get_par_embedding_levels (
 
     last_strong = base_dir;
     /* Resolving dependency of loops for rules W4 and W5, W5 may
-       want to prevent W4 to take effect in the next turn, do this 
+       want to prevent W4 to take effect in the next turn, do this
        through "w4". */
     w4 = true;
     /* Resolving dependency of loops for rules W4 and W5 with W7,

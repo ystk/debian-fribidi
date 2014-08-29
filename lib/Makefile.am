@@ -4,12 +4,14 @@ lib_LTLIBRARIES = libfribidi.la
 
 AM_CPPFLAGS = $(MISC_CFLAGS)
 
-libfribidi_la_LDFLAGS = -no-undefined -version-info $(LT_VERSION_INFO) -export-symbols-regex "^fribidi_.*"
+libfribidi_la_LDFLAGS = -no-undefined -version-info $(LT_VERSION_INFO)
 libfribidi_la_LIBADD = $(MISC_LIBS)
 libfribidi_la_DEPENDENCIES =
 
 if OS_WIN32
 libfribidi_la_LDFLAGS += -export-symbols $(srcdir)/fribidi.def
+else
+libfribidi_la_LDFLAGS += -export-symbols-regex "^fribidi_.*"
 endif # OS_WIN32
 
 if FRIBIDI_CHARSETS
@@ -80,3 +82,5 @@ $(top_builddir)/config.h: $(top_srcdir)/config.h.in
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) config.h
 
 .PHONY: gen
+
+-include $(top_srcdir)/git.mk
