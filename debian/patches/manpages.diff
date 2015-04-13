@@ -1,5 +1,5 @@
 Description: emphasize that a hyphen is really needed in "-1" by writing it as \(hy1
-Author: أحمد المحمودي (Ahmed El-Mahmoudy) <aelmahmoudy@sabily.org>
+Author: أحمد المحمودي (Ahmed El-Mahmoudy) <aelmahmoudy@users.sourceforge.net>
 Bug: https://bugs.freedesktop.org/show_bug.cgi?id=54147
 Forwarded: https://bugs.freedesktop.org/attachment.cgi?id=66207
 --- a/doc/fribidi_remove_bidi_marks.3
