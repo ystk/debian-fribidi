@@ -1,3 +1,15 @@
+fribidi (0.19.6-3+deb8u1) jessie-security; urgency=medium
+
+  * Non-maintainer upload by the ELTS Team.
+  * CVE-2022-25308
+    stack-buffer-overflow issue in main()
+  * CVE-2022-25309
+    heap-buffer-overflow issue in fribidi_cap_rtl_to_unicode()
+  * CVE-2022-25310
+    SEGV issue in fribidi_remove_bidi_marks()
+
+ -- Thorsten Alteholz <debian@alteholz.de>  Sun, 10 Apr 2022 11:03:02 +0200
+
 fribidi (0.19.6-3) unstable; urgency=medium
 
   * debian/control: Bumped Standards-Version to 3.9.6
